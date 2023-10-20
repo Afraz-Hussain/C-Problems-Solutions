@@ -1,0 +1,40 @@
+Question: Sort Array Elements after specific position
+
+Solution 
+
+#include<iostream>
+using namespace std;
+void swapfun(int& num1, int& num2) {
+	int temp = num1;
+	num1 = num2;
+	num2 = temp;
+}
+void swaparray(int arr[],int size,int pos) {
+	int start = pos+1;
+	int end = size-1;
+	while (start < end) {
+		swapfun(arr[start], arr[end]);
+		start++;
+		end--;
+	}
+
+}
+void parray(int arr[], int size) {
+	for (int i = 0; i < size; i++) {
+		cout << arr[i] << " ";
+
+	}
+	cout << '\n';
+}
+int main() {
+	int data[] = { 15,20,30,35,60 };
+	int size = sizeof(data) / sizeof(data[0]);
+	cout << "Before Swapping Array is...\n";
+	parray(data, size);
+	cout << '\n';
+	cout << "After Swapping Array is...\n";
+	swaparray(data, size,2);
+	parray(data, size);
+	return 0;
+}
+
