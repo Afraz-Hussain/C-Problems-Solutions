@@ -1,28 +1,42 @@
 1class Solution {
 2public:
-3    vector<int> asteroidCollision(vector<int>& asteroids) {
-4        vector<int> st;
-5        
-6        for (int ast = 0; ast < asteroids.size(); ast++) {
-7            int current = asteroids[ast];
-8            bool destroyed = false;
-9            while (!st.empty() && st.back() > 0 && current < 0) {
-10                if (st.back() < -current) {
-11                    st.pop_back();  
-12                    continue;
-13                } else if (st.back() == -current) {
-14                    st.pop_back(); 
-15                }
-16                destroyed = true; 
+3    vector<int> asteroidCollision(vector<int>& ast) {
+4        stack<int>st;
+5
+6     for(int i=0;i<ast.size();i++)   {
+7        int curr=ast[i];
+8        bool flag=true;
+9        while(!st.empty()&&st.top()>0&&curr<0){
+10            int sum=st.top()+curr;
+11            if(sum<0){
+12                st.pop();
+13               
+14            }
+15            else if(sum>0){
+16                flag=false;
 17                break;
-18            }
-19            
-20            // If the current asteroid survived, push it to the stack
-21            if (!destroyed) {
-22                st.push_back(current);
-23            }
-24        }
-25        return st;
-26    }
-27};
-28
+18            }else{
+19                st.pop();
+20                flag=false;
+21                break;
+22            }
+23            // agr ast bach ghya ha to usy stack ma push kra do
+24        
+25        }
+26       if(flag){
+27            st.push(curr);
+28        }
+29
+30     }
+31      
+32       
+33        int size=st.size();
+34         vector<int>res(size);
+35        for(int a=size-1;a>=0;a--){
+36            res[a]=st.top();
+37            st.pop();
+38        }
+39        return res;
+40
+41    }
+42};
